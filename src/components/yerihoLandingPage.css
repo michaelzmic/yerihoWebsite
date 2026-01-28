@@ -1,0 +1,225 @@
+/* --- 1. Imports & Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Assistant:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=OpenSans:wght@400;700&family=Assistant:wght@400;700&display=swap');
+
+
+/* --- 2. Animations --- */
+/**
+ * Animation for the rotating light beams
+ */
+@keyframes spin-beams {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- 3. Layout & Main Elements --- */
+/**
+ * Main title styling
+ */
+
+body {
+  touch-action: pan-y pan-x;  /* Allows scrolling but not zooming */
+}
+ 
+.main-title {
+  font-family: 'Karantina', sans-serif;
+  font-size: 5rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+/**
+ * Main container for the image and effect components
+ */
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 15px;
+  z-index: 1;
+  text-decoration: none;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/**
+ * The actual image inside the wrapper
+ */
+.nav-image {
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.tamarB {
+  position: absolute;
+  top: 349px;  /* Changed from 0 to 100% to position below */
+  left: 960px;
+ 
+}
+.dekelB {
+  position: absolute;
+  top: 349px;  /* Changed from 0 to 100% to position below */
+  left: 00px;
+ 
+}
+
+/**
+ * Static text overlay on top of the image
+ */
+.text-overlay {
+  position: absolute;
+  top: 70%;  /* Changed from 0 to 100% to position below */
+  left: 0;
+  width: 100%;
+  height: auto;  /* Changed from 100% to auto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Karantina', sans-serif;
+  font-size: 4rem;
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+  border-radius: 15px;
+  z-index: 3;
+  margin-top: 3rem;  /* Add spacing between image and text */
+}
+
+/* --- 4. Light Beams Effect --- */
+/**
+ * Background container for light beams with a masking gradient
+ */
+.beams-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1200px; 
+  height: 800px;
+  margin-top: -400px;
+  margin-left: -600px;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  overflow: hidden;
+  background: transparent; /* ← Add this */
+
+  
+  /* Masking the bottom half to create a directional light effect */
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 60%);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 60%);
+}
+
+/**
+ * Inner rotating element that creates the actual beam pattern
+ */
+.beams-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.8) 0deg 15deg,
+    transparent 15deg 45deg,
+    rgba(255, 255, 255, 0.8) 45deg 60deg,
+    transparent 60deg 90deg,
+    rgba(255, 255, 255, 0.8) 90deg 105deg,
+    transparent 105deg 135deg,
+    rgba(255, 255, 255, 0.8) 135deg 150deg,
+    transparent 150deg 180deg,
+    rgba(255, 255, 255, 0.8) 180deg 195deg,
+    transparent 195deg 225deg,
+    rgba(255, 255, 255, 0.8) 225deg 240deg,
+    transparent 240deg 270deg,
+    rgba(255, 255, 255, 0.8) 270deg 285deg,
+    transparent 285deg 315deg,
+    rgba(255, 255, 255, 0.8) 315deg 330deg,
+    transparent 330deg 360deg
+  );
+
+  /* Circular radial mask and blur for softness */
+  -webkit-mask-image: radial-gradient(circle, black 20%, transparent 65%);
+  mask-image: radial-gradient(circle, black 20%, transparent 65%);
+  filter: blur(4px);
+}
+
+/* --- 5. Interactive States (Hover) --- */
+/**
+ * Scales the entire button wrapper
+ */
+.image-wrapper:hover {
+  transform: scale(1.08);
+}
+
+/**
+ * Shows and animates the light beams on hover
+ */
+.image-wrapper:hover .beams-light {
+  opacity: 1;
+}
+
+.image-wrapper:hover .beams-light::before {
+  animation: spin-beams 12s linear infinite;
+}
+
+/**
+ * Brightens and adjusts text overlay on hover
+ */
+.image-wrapper:hover .text-overlay {
+  opacity: 1;
+  letter-spacing: 2px;
+}
+
+
+
+/* Second Section Styles */
+
+
+.semel-logo {
+  width: auto;
+  height: auto;
+  
+}
+
+.info-text {
+  font-family: 'OpenSans', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  text-align: center;
+  color: #333;
+}
+
+
+
+.menu-image {
+  width: auto;
+  height: auto;
+}
+
+.line-image {
+  width: auto;
+  height: auto;
+}
+
+
+.contact-info {
+  position: absolute;
+  bottom: 3rem;
+  left: 6rem;
+}
+
+.contact-image {
+  width: auto;
+  height: auto;
+}
