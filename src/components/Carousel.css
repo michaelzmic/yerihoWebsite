@@ -1,0 +1,164 @@
+/* ========================================================
+   ANIMATION TWEAKS - EASILY ADJUST TIMING AND ANGLES HERE
+   ======================================================== */
+.carousel-container {
+  --animation-speed: 1.2s;           /* Total speed of the fade and rotation */
+  --rotation-angle-start: -360deg;   /* The image starts its rotation backwards from this angle */
+  --rotation-angle-end: 0deg;        /* The image ends up completely straight at 0deg */
+  --image-scale-start: 0.6;          /* The image starts out small (60%) when fading in */
+  --image-scale-end: 1;              /* The image ends up full size (100%) */
+}
+
+/* ---------------- Layout & Wrappers ---------------- */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: inherit; /* Inherits your app font, system-ui looks best */
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Fixed height to prevent the page from jumping when content changes */
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------------- Main Slide Container ---------------- */
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 3rem 4rem;
+  box-sizing: border-box;
+  
+  /* Fade animation on the entire slide (Both Text and Image fade together) */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--animation-speed) ease-in-out,
+              visibility var(--animation-speed) ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+.carousel-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  gap: 4rem;
+  direction: rtl; /* Set direction to RTL for Hebrew */
+}
+
+/* ---------------- Text Styles ---------------- */
+.carousel-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 500px;
+}
+
+.carousel-text h2 {
+  font-size: 5rem;
+  margin: 0 0 1rem 0;
+  font-weight: 800;
+  letter-spacing: -2px;
+  
+  /* Magic Gradient! Uses variables passed from the JS so every slide has a unique color */
+  background: linear-gradient(180deg, var(--theme-primary) 0%, var(--theme-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--theme-secondary); /* Fallback */
+  line-height: 1.1;
+}
+
+.carousel-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 0 2rem 0;
+  font-weight: 600;
+}
+
+.carousel-btn {
+  /* Button uses the theme color of the active slide */
+  background: var(--theme-primary);
+  color: white;
+  border: none;
+  padding: 0.8rem 2.8rem;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-btn:hover {
+  background: var(--theme-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------------- Image Animation Styles ---------------- */
+.carousel-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.carousel-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* Adds a slight 3D shadow depth to the image */
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+  
+  /* Applies rotation and scaling animation ONLY to the image */
+  transform: rotate(var(--rotation-angle-start)) scale(var(--image-scale-start));
+  /* cubic-bezier adds a nice slight smooth bounce effect, change to ease-in-out if you prefer it simpler */
+  transition: transform var(--animation-speed) cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* When the slide becomes active, the image ends up right side up and full size */
+.carousel-slide.active .carousel-image img {
+  transform: rotate(var(--rotation-angle-end)) scale(var(--image-scale-end));
+}
+
+/* ---------------- Dots Navigation ---------------- */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #d1d5db;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot.active {
+  background-color: #6b7280;
+  transform: scale(1.4);
+}

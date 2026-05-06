@@ -1,27 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import YerihoLandingPage from './components/yerihoLandingPage';
-
-// Placeholder components for internal pages
-const PageOne = () => <h1 style={{ textAlign: 'center' }}>Welcome to Page One!</h1>;
-const PageTwo = () => <h1 style={{ textAlign: 'center' }}>Welcome to Page Two!</h1>;
+import React from 'react'
+import Carousel from './components/Carousel'
+import './index.css'
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-      
-        
-        <Routes>
-          <Route path="/" element={<YerihoLandingPage />} />
-          <Route path="/page-one" element={<PageOne />} />
-          <Route path="/page-two" element={<PageTwo />} />
-        </Routes>
-
-        
-      </div>
-    </Router>
-  );
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
+      <Carousel />
+    </div>
+  )
 }
 
-export default App;
+export default App
